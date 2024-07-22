@@ -49,7 +49,7 @@ func main() {
 	//receiver := rmqsreceiver.Connect()
 	
 	receiver := rmqsreceiver.Connect("ProducedUS")
-	receiver.ReceiveMessage()
+	go receiver.ReceiveMessage()
 
         router := gin.Default()
 

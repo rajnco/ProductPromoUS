@@ -3,7 +3,7 @@ package database
 import (
         "gorm.io/driver/sqlite"
         "gorm.io/gorm"
-        "product-info/database/model"
+        "product-promo-us/database/model"
         log "github.com/sirupsen/logrus"
 )
 
@@ -12,7 +12,7 @@ type product model.Product
 
 func InitDB() *gorm.DB {
 
-        db, err := gorm.Open(sqlite.Open("product.db"), &gorm.Config{})
+        db, err := gorm.Open(sqlite.Open("products.db"), &gorm.Config{})
         if err != nil {
                 log.Println("failed to connect database")
         }
