@@ -2,14 +2,9 @@ package controller
 
 import (
         "product-promo-us/handler"
-        //"product-promo-us/database/model"
-        //"strconv"
         "strings"
 
         "github.com/gin-gonic/gin"
-        //"github.com/prometheus/client_golang/prometheus"
-        //"github.com/prometheus/client_golang/prometheus/promauto"
-        //log "github.com/sirupsen/logrus"
 )
 
 // ListProducts - Get all Products Information

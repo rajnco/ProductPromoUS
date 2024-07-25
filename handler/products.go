@@ -19,6 +19,7 @@ type Product struct {
         db *gorm.DB
 }
 
+
 // Build - connect/re-use db connection
 func (p *Product) Build(db *gorm.DB) {
         if db == nil {
@@ -27,6 +28,7 @@ func (p *Product) Build(db *gorm.DB) {
                 p.db = db
         }
 }
+
 
 // TotalCount - returns total count from table
 func (p *Product) TotalCount() int64 {
@@ -63,6 +65,7 @@ func (p *Product) GetProducts() (response []model.Product, status int) {
         status = http.StatusOK
         return
 }
+
 
 // Clean - clean the table - delete all the records
 func (p *Product) Clean() error {

@@ -15,8 +15,6 @@ import (
 	amqp "github.com/rabbitmq/amqp091-go"
 	log "github.com/sirupsen/logrus"
 	"github.com/prometheus/client_golang/prometheus"
-	// "context"
-	// "strings"
 )
 
 type Receiver struct {
@@ -24,19 +22,6 @@ type Receiver struct {
 	channel *amqp.Channel
 	queue   *amqp.Queue
 }
-
-/*
-type Product struct {
-	Id          int     `json:"id"`
-	Name        string  `json:"name"`
-	Description string  `json:"description"`
-	Price       float32 `json:"price"` //UnitPrice
-	Quantity    int     `json:"quantity"`
-	Discount    int     `json:"discount"` //MaxDiscountPercent
-	Country     string  `json:"country"`
-	Region      string  `json:"region"`
-}
-*/
 
 var (
         IdAccessCounter = prometheus.NewCounterVec(
@@ -81,7 +66,6 @@ func Connect(queueName string) *Receiver {
 	}()
 
 	return &Receiver{channel: channel, queue: &queue}
-	//return &Receiver{connection: connection, channel: channel, queue: &queue}
 }
 
 func (r *Receiver) ReceiveMessage() error {
@@ -111,14 +95,6 @@ func (r *Receiver) ReceiveMessage() error {
 		} else {
 			log.Printf("issue with upsert")
 		}
-
 	}
 	return nil
 }
-
-/*
-func (r *Receiver) Close() {
-	r.channel.Close()
-	r.connection.Close()
-}
-*/

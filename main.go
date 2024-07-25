@@ -30,7 +30,6 @@ type Product struct {
 
 
 func init(){
-        //prometheus.MustRegister(controller.IdAccessCounter)
         prometheus.MustRegister(rmqsreceiver.IdAccessCounter)
 
         if err := database.InitDB().Error; err != nil {
@@ -64,7 +63,6 @@ func main() {
 
         mainGroup := router.Group("/")
         {
-
                 productsGroup := mainGroup.Group("/products")
                 {
                         productsGroup.GET("", controller.ListProducts)
@@ -79,12 +77,9 @@ func main() {
                 {
                         prometheusGroup.GET("", gin.WrapH(promhttp.Handler()))
                 }
-
         }
 
         // use ginSwagger middleware to serve the API docs
         router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	
-
 	router.Run(":8081")
 }
