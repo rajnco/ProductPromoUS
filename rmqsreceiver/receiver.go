@@ -40,7 +40,8 @@ func init() {
 
 // func Connect() *Receiver {
 func Connect(queueName string) *Receiver {
-	connection, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	//connection, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	connection, err := amqp.Dial("amqp://guest:guest@rabbitmq:5672/")
 	if err != nil {
 		log.Panicf("failed to connect RabbitMQ : %+v ", err)
 	}
