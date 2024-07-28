@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: productpromous
+    backend: two
+  name: productpromous
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productpromous
+      backend: two
+  template:
+    metadata:
+      labels:
+        app: productpromous
+        backend: two
+    spec:
+      containers:
+      - image: 127.0.0.1:5000/productpromous:latest
+        name: productpromous
+        ports:
+        - containerPort: 8081
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+
+
+#--- k create deployment  productpromous  --image=productpromous --replicas=1  --port=8081 --dry-run=client -o yaml  > Deployment.productpromous.yaml
+#
+#
+
+
+---
+
+
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: productpromous
+spec:
+  maxReplicas: 10
+  minReplicas: 1
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: productpromous
+  targetCPUUtilizationPercentage: 60
+status:
+  currentReplicas: 0
+  desiredReplicas: 0
+
